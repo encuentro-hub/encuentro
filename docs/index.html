@@ -61,7 +61,7 @@ body { font-family: var(--mono); background: var(--bg); color: var(--ink); overf
 .vnode:hover .nbox { border-color: rgba(255,255,255,0.22); transform: translate(-1px,-1px); }
 .vnode.selected .nbox { border-color: rgba(180,170,255,0.5); box-shadow: 0 0 0 1px rgba(180,170,255,0.08); }
 .vnode.dim { opacity: 0.1; }
-.vnode .ntop { padding: 4px 8px; font-size: 8px; letter-spacing: 0.04em; display: flex; justify-content: space-between; color: var(--ink3); border-bottom: 0.5px solid var(--border2); }
+.vnode .ntop { display: none; }
 .vnode .nthumb { aspect-ratio: 16/9; position: relative; overflow: hidden; background: #111; border-radius: 8px 8px 0 0; }
 .vnode .nthumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.88; }
 .vnode .nthumb .ascii { display: flex; align-items: center; justify-content: center; height: 100%; font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,0.1); white-space: pre; text-align: center; padding: 4px; }
