@@ -743,7 +743,11 @@ function startDragNode(e,id){
   e.stopPropagation();isDraggingNode=true;wasDragging=false;
   const p=pieces.find(x=>x.id===id);
   const offX=e.clientX-(p.x*transform.scale+transform.x),offY=e.clientY-(p.y*transform.scale+transform.y);
-  const move=mv=>{wasDragging=true;p.x=(mv.clientX-offX-transform.x)/transform.scale;p.y=(mv.clientY-offY-transform.y)/transform.scale;positionNodes();renderEdges();};
+  canvas.addEventListener('wheel',e=>{
+  ...
+  transform.scale=Math.min(Math.max(transform.scale*f,0.2),4);
+  positionNodes();renderEdges();
+},{passive:false});
   const up=()=>{isDraggingNode=false;document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);};
   document.addEventListener('mousemove',move);document.addEventListener('mouseup',up);
 }
