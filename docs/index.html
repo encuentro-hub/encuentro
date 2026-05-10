@@ -458,7 +458,7 @@ function drawTagLineMulti(svg,ca,cb,tagItems,opacity,prefix,uid,scale=1){
     const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
     txt.setAttribute('font-family',"'Courier Prime',monospace");txt.setAttribute('font-size',7*scale);txt.setAttribute('font-weight','700');txt.setAttribute('fill',ti.color);txt.setAttribute('opacity',opacity);txt.setAttribute('letter-spacing','0.5');
     const tp=document.createElementNS('http://www.w3.org/2000/svg','textPath');
-    tp.setAttribute('href','#'+pid);tp.setAttribute('startOffset','0');tp.setAttribute('textLength',len);tp.setAttribute('lengthAdjust','spacing');tp.textContent=(ti.tag+'    ').repeat(reps);
+    tp.setAttribute('href','#'+pid);tp.setAttribute('startOffset','0');tp.textContent=(ti.tag+'    ').repeat(reps);
     txt.appendChild(tp);svg.appendChild(txt);return;
   }
   const pxC=5.5,gap='    ';
@@ -743,11 +743,7 @@ function startDragNode(e,id){
   e.stopPropagation();isDraggingNode=true;wasDragging=false;
   const p=pieces.find(x=>x.id===id);
   const offX=e.clientX-(p.x*transform.scale+transform.x),offY=e.clientY-(p.y*transform.scale+transform.y);
-  canvas.addEventListener('wheel',e=>{
-  ...
-  transform.scale=Math.min(Math.max(transform.scale*f,0.2),4);
-  positionNodes();renderEdges();
-},{passive:false});
+  const move=mv=>{wasDragging=true;p.x=(mv.clientX-offX-transform.x)/transform.scale;p.y=(mv.clientY-offY-transform.y)/transform.scale;positionNodes();renderEdges();};
   const up=()=>{isDraggingNode=false;document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);};
   document.addEventListener('mousemove',move);document.addEventListener('mouseup',up);
 }
